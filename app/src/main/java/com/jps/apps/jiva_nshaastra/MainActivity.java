@@ -19,6 +19,7 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
     private EditText username, email, password, dob;
+    private TextView loginmotivator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 signUp(name, mail, pass, dobi);
             }
         });
-        TextView loginmotivator = findViewById(R.id.Loginmotivator);
+        loginmotivator= findViewById(R.id.Loginmotivator);
         loginmotivator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -8,13 +8,13 @@ import android.view.View;
 import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
-
+    private TextView signupmotivator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        TextView signupmotivator = findViewById(R.id.Signupmotivator);
+        signupmotivator = findViewById(R.id.Signupmotivator);
         signupmotivator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
