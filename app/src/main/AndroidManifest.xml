@@ -10,7 +10,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/Theme.JivanSaarthi">
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".philosphies.Pbk"></activity>
+        <activity android:name=".philosphies.Sav" />
+        <activity android:name=".philosphies.Sam" />
+        <activity android:name=".philosphies.Sat" />
+        <activity android:name=".philosphies.Sph" />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".HomeActivity" /> <!-- Splash screen -->
         <activity
             android:name=".SplashActivity"

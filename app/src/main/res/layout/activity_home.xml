@@ -23,7 +23,7 @@
             app:srcCompat="@drawable/userphoto" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/user"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -49,58 +49,58 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <TextView
+        android:id="@+id/savtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/librebaskerville"
+        android:text="SAV"
+        android:textColor="#d0a933"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.141"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sphtext" />
+
+    <TextView
         android:id="@+id/sattext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="36dp"
         android:fontFamily="@font/librebaskerville"
         android:text="SAT"
         android:textColor="#d0a933"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintHorizontal_bias="0.133"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/savtext" />
 
     <TextView
         android:id="@+id/samtext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="232dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/librebaskerville"
         android:text="SAM"
         android:textColor="#d0a933"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.148"
+        app:layout_constraintHorizontal_bias="0.131"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/sattext" />
 
     <TextView
         android:id="@+id/pbktext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_width="66dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/librebaskerville"
         android:text="PBK"
         android:textColor="#d0a933"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintHorizontal_bias="0.129"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spatext" />
-
-    <TextView
-        android:id="@+id/spatext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="328dp"
-        android:fontFamily="@font/librebaskerville"
-        android:text="SPA"
-        android:textColor="#d0a933"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.14"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/samtext" />
 </androidx.constraintlayout.widget.ConstraintLayout>
