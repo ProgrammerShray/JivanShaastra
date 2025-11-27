@@ -30,7 +30,7 @@ public class HomeActivity extends AppCompatActivity {
         sph = findViewById(R.id.sphtext);
         sav = findViewById(R.id.savtext);
         sam = findViewById(R.id.samtext);
-        sav = findViewById(R.id.sattext);
+        sat = findViewById(R.id.sattext);
         pbk = findViewById(R.id.pbktext);
 
         //evenlisteners
