@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         dob = findViewById(R.id.dob);
+        loginmotivator= findViewById(R.id.Loginmotivator);
 
         findViewById(R.id.submit).setOnClickListener(v -> {
             String name = username.getText().toString().trim();
@@ -43,13 +44,13 @@ public class MainActivity extends AppCompatActivity {
                 signUp(name, mail, pass, dobi);
             }
         });
-        loginmotivator= findViewById(R.id.Loginmotivator);
+
         loginmotivator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
-                finish();
+//                finish();
             }
         });
     }
