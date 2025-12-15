@@ -33,7 +33,7 @@ public class HomeActivity extends AppCompatActivity {
         sat = findViewById(R.id.sattext);
         pbk = findViewById(R.id.pbktext);
 
-        //evenlisteners
+        //eventlisteners
 
         sph.setOnClickListener(new View.OnClickListener() {
             @Override
