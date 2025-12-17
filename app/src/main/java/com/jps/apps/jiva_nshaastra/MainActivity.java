@@ -21,6 +21,8 @@ import org.json.JSONObject;
 public class MainActivity extends AppCompatActivity {
     private EditText username, email, password, dob;
     private Button loginmotivator;
+    private Button signup;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,8 +34,15 @@ public class MainActivity extends AppCompatActivity {
         password = findViewById(R.id.password);
         dob = findViewById(R.id.dob);
         loginmotivator= findViewById(R.id.Loginmotivator);
+        signup = findViewById(R.id.submit);
 
-        findViewById(R.id.submit).setOnClickListener(v -> {
+        if (signup == null) {
+            Toast.makeText(this, "Submit button not found!", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+
+        signup.setOnClickListener(v -> {
             String name = username.getText().toString().trim();
             String mail = email.getText().toString().trim();
             String pass = password.getText().toString().trim();
