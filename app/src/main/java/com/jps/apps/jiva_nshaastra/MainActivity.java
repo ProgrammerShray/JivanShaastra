@@ -58,14 +58,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-         loginmotivator.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                });
+        if (loginmotivator == null) {
+            Toast.makeText(this, "Login button not found!", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        loginmotivator.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+        });
+
     }
     private void signUp(String name, String email, String password, String dob){
         String url = "http://192.168.7.174:5000/auth/signup";
