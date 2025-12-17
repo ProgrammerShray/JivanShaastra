@@ -42,27 +42,30 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        signup.setOnClickListener(v -> {
-            String name = username.getText().toString().trim();
-            String mail = email.getText().toString().trim();
-            String pass = password.getText().toString().trim();
-            String dobi = dob.getText().toString().trim();
-
-            if (name.isEmpty() || mail.isEmpty() || pass.isEmpty() || dobi.isEmpty()) {
-                Toast.makeText(this, "Please fill all fields!", Toast.LENGTH_SHORT).show();
-            } else {
-                signUp(name, mail, pass, dobi);
-            }
-        });
-
-        loginmotivator.setOnClickListener(new View.OnClickListener() {
+        signup.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-//                finish();
+            public void onClick(View view) {
+                String name = username.getText().toString().trim();
+                String mail = email.getText().toString().trim();
+                String pass = password.getText().toString().trim();
+                String dobi = dob.getText().toString().trim();
+
+                if (name.isEmpty() || mail.isEmpty() || pass.isEmpty() || dobi.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Please fill all fields!", Toast.LENGTH_SHORT).show();
+                } else {
+                    signUp(name, mail, pass, dobi);
+                }
             }
         });
+
+         loginmotivator.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
     }
     private void signUp(String name, String email, String password, String dob){
         String url = "http://192.168.7.174:5000/auth/signup";
