@@ -54,9 +54,6 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Please fill all fields!", Toast.LENGTH_SHORT).show();
                 } else {
                     signUp(name, mail, pass, dobi);
-                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                    startActivity(intent);
-                    finish();
                 }
             }
         });
@@ -102,6 +99,9 @@ public class MainActivity extends AppCompatActivity {
                             Intent intent = new Intent(this, HomeActivity.class);
                             startActivity(intent);
                             finish();
+                        }
+                        else{
+                            Toast.makeText(this, "Something went wrong!", Toast.LENGTH_SHORT).show();
                         }
 
                     } catch (Exception e) {
