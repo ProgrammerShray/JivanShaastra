@@ -14,7 +14,7 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/librebaskerville"
         android:gravity="center"
-        android:text="CREATE YOUR \n ACCOUNT"
+        android:text="Create Your \n Account"
         android:textColor="@color/jps1"
         android:textSize="24sp"
         android:textStyle="bold"
