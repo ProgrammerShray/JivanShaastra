@@ -143,12 +143,13 @@
         android:id="@+id/Loginmotivator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
         android:background="#00FFFFFF"
-        android:textColor="@color/black"
-        android:layout_marginBottom="63dp"
         android:text="Already Have An Account? Login!!"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent" />
 
 
