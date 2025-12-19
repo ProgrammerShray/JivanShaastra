@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void signUp(String name, String email, String password, String dob){
-        String url = "http://192.168.7.174:5000/auth/signup";
+        String url = "http://localhost:5000/auth/signup";
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
