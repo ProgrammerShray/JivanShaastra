@@ -71,7 +71,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void signUp(String name, String email, String password, String dob){
-        String url = "http://192.168.178.159:5000/auth/signup";
+//        String url = "http://192.168.178.159:5000/auth/signup"; --> Use when your device is using real mobile
+        String url = "http://10.0.2.2:5000/auth/signup"; //it will work with avd or any virtual device
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
