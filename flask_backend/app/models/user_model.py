@@ -1,5 +1,6 @@
 from app.utils.db import get_db
 
+
 class User:
     @staticmethod
     def create_table():
@@ -18,8 +19,10 @@ class User:
 
 class UserModel:
     def create_user(self, name, email, password, dob):
+      
         db = get_db()
-        cursor = db.cursor()
+        cursor = db.cursor(dictionary=True)
+
 
         query = """
             INSERT INTO users (name, email, password, dob)
