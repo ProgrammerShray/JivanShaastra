@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void signUp(String name, String email, String password, String dob){
-        String url = "http://localhost:5000/auth/signup";
+        String url = "http://127.0.0.1:5000/auth/signup";
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -110,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 },
                 error -> {
                     Toast.makeText(this, "Error: " + error.toString(), Toast.LENGTH_LONG).show();
+                    System.out.println(error.toString());
                 }
         );
 
