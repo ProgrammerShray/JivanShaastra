@@ -6,22 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".philosphies.Sph">
 
-    <TextView
-        android:id="@+id/sphheading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:fontFamily="@font/librebaskerville"
-        android:padding="23dp"
-        android:text="SPH = Sva-Prerna Harmony (Self-Inspired Harmony)"
-        android:textColor="#d89843"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="0dp"
@@ -34,6 +18,32 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/sphheading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:fontFamily="@font/librebaskerville"
+                android:padding="23dp"
+                android:text="SPH = Sva-Prerna Harmony (Self-Inspired Harmony)"
+                android:textColor="#d89843"
+                android:textSize="36sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/sphShloakOpener"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DEEP DIVE"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:textColor=""
+                />
+
+        </LinearLayout>
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
