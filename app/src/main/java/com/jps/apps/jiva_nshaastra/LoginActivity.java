@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void loginUser(String email, String password) {
 
-        String url = "http://10.0.2.2:5000/auth/login"; // emulator
+        String url = "https://flaskbackendserverdb.onrender.com/auth/login"; // emulator
         // use your LAN IP if physical device
 
         RequestQueue queue = Volley.newRequestQueue(this);
