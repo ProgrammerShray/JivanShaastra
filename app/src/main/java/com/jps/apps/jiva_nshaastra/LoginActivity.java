@@ -3,8 +3,8 @@ package com.jps.apps.jiva_nshaastra;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -52,8 +52,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void loginUser(String email, String password) {
 
-        String url = "https://flaskbackendserverdb.onrender.com/auth/login"; // emulator
-        // use your LAN IP if physical device
+        String url = "https://flaskbackendserverdb.onrender.com/auth/login";
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -72,18 +71,34 @@ public class LoginActivity extends AppCompatActivity {
                 response -> {
                     try {
                         boolean success = response.getBoolean("success");
-                        String message = response.getString("message");
-
-                        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 
                         if (success) {
+                            String token = response.getString("token");
+                            String name = response.getString("name");
+
+                            // 🔐 Save JWT token securely
+                            SharedPreferences prefs =
+                                    getSharedPreferences("UserPrefs", MODE_PRIVATE);
+
+                            prefs.edit()
+                                    .putString("token", token)
+                                    .putString("name", name)
+                                    .apply();
+
+                            Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show();
+
                             Intent intent = new Intent(this, HomeActivity.class);
                             startActivity(intent);
                             finish();
+                        } else {
+                            Toast.makeText(this,
+                                    response.getString("message"),
+                                    Toast.LENGTH_SHORT).show();
                         }
 
                     } catch (Exception e) {
                         e.printStackTrace();
+                        Toast.makeText(this, "Invalid server response", Toast.LENGTH_SHORT).show();
                     }
                 },
                 error -> {
