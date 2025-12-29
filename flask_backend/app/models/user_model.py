@@ -1,24 +1,5 @@
 from app.utils.db import get_db
 
-
-class User:
-    @staticmethod
-    def create_table():
-        db = get_db()
-        cursor = db.cursor()
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS users (
-                id SERIAL PRIMARY KEY,
-                name VARCHAR(255) NOT NULL,
-                email VARCHAR(255) UNIQUE NOT NULL,
-                password VARCHAR(255) NOT NULL,
-                dob DATE NOT NULL
-            );
-        """)
-        db.commit()
-        cursor.close()
-
-
 class UserModel:
     def create_user(self, name, email, password, dob):
         db = get_db()
@@ -69,3 +50,24 @@ class UserModel:
             }
 
         return None
+
+    def get_user_by_id(self, user_id):
+     db = get_db()
+     cursor = db.cursor()
+
+     cursor.execute(
+            "SELECT id, name, email FROM users WHERE id = %s",
+            (user_id,)
+        )
+
+     row = cursor.fetchone()
+     cursor.close()
+
+     if row:
+        return {
+            "id": row[0],
+            "name": row[1],
+            "email": row[2]
+        }
+
+     return None

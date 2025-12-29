@@ -1,13 +1,27 @@
+import os
 import psycopg2
-from flask import g, current_app
+from flask import g
+from urllib.parse import urlparse
 
 
 def get_db():
     if "db" not in g:
+        database_url = os.environ.get("DATABASE_URL")
+
+        if not database_url:
+            raise RuntimeError("DATABASE_URL environment variable is not set")
+
+        url = urlparse(database_url)
+
         g.db = psycopg2.connect(
-            current_app.config["DATABASE_URL"],
-            sslmode="require"  # IMPORTANT for Neon
+            dbname=url.path[1:],      # remove leading /
+            user=url.username,
+            password=url.password,
+            host=url.hostname,
+            port=url.port,
+            sslmode="require"         # REQUIRED for Neon
         )
+
     return g.db
 
 
