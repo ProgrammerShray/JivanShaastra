@@ -6,16 +6,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.jps.apps.jiva_nshaastra.philosphies.Pbk;
-import com.jps.apps.jiva_nshaastra.philosphies.Sam;
-import com.jps.apps.jiva_nshaastra.philosphies.Sat;
-import com.jps.apps.jiva_nshaastra.philosphies.Sav;
-import com.jps.apps.jiva_nshaastra.philosphies.Sph;
+import com.android.volley.DefaultRetryPolicy;
+
+import com.jps.apps.jiva_nshaastra.philosphies.*;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,88 +23,59 @@ public class HomeActivity extends AppCompatActivity {
 
     private TextView name;
     private TextView sph, sav, sam, sat, pbk;
-    private Intent intent;
+    private RequestQueue requestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        name = findViewById(R.id.user);
+        // Initialize RequestQueue once
+        requestQueue = Volley.newRequestQueue(this);
 
-        //fetching the name from the database
+        name = findViewById(R.id.user);
+        if (name == null) {
+            Toast.makeText(this, "User TextView not found!", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // Fetch email from SharedPreferences
         String email = getSharedPreferences("UserPrefs", MODE_PRIVATE)
                 .getString("email", null);
 
-        if (email != null) {
+        if (email != null && !email.isEmpty()) {
             fetchUserName(email);
+        } else {
+            name.setText("Welcome");
         }
 
-        //philosphies labels
+        // Philosophy labels
         sph = findViewById(R.id.sphtext);
         sav = findViewById(R.id.savtext);
         sam = findViewById(R.id.samtext);
         sat = findViewById(R.id.sattext);
         pbk = findViewById(R.id.pbktext);
 
-        //eventlisteners
-
-        sph.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              intent = new Intent(HomeActivity.this, Sph.class);
-                startActivity(intent);
-            }
-        });
-
-        sav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              intent = new Intent(HomeActivity.this, Sav.class);
-                startActivity(intent);
-
-            }
-        });
-
-        sam.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              intent = new Intent(HomeActivity.this, Sam.class);
-                startActivity(intent);
-
-            }
-        });
-
-        sat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              intent = new Intent(HomeActivity.this, Sat.class);
-                startActivity(intent);
-
-            }
-        });
-
-        pbk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              intent = new Intent(HomeActivity.this, Pbk.class);
-                startActivity(intent);
-
-            }
-        });
+        setClickListeners();
     }
 
+    private void setClickListeners() {
+        sph.setOnClickListener(v -> startActivity(new Intent(this, Sph.class)));
+        sav.setOnClickListener(v -> startActivity(new Intent(this, Sav.class)));
+        sam.setOnClickListener(v -> startActivity(new Intent(this, Sam.class)));
+        sat.setOnClickListener(v -> startActivity(new Intent(this, Sat.class)));
+        pbk.setOnClickListener(v -> startActivity(new Intent(this, Pbk.class)));
+    }
 
     private void fetchUserName(String email) {
         String url = "https://flaskbackendserverdb.onrender.com/auth/user-name";
-
-        RequestQueue queue = Volley.newRequestQueue(this);
 
         JSONObject json = new JSONObject();
         try {
             json.put("email", email);
         } catch (JSONException e) {
             e.printStackTrace();
+            return;
         }
 
         JsonObjectRequest request = new JsonObjectRequest(
@@ -114,18 +84,28 @@ public class HomeActivity extends AppCompatActivity {
                 json,
                 response -> {
                     try {
-                        String Name = response.getString("name");
-                        name.setText("Welcome, " + Name);
+                        String nameFromDb = response.getString("name");
+                        name.setText("Welcome, " + nameFromDb);
                     } catch (JSONException e) {
+                        name.setText("Welcome");
                         e.printStackTrace();
                     }
                 },
                 error -> {
                     name.setText("Welcome");
-                    error.printStackTrace();
+                    Toast.makeText(this,
+                            "Unable to fetch name",
+                            Toast.LENGTH_SHORT).show();
                 }
         );
 
-        queue.add(request);
+        // IMPORTANT for Render (cold starts)
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                15000, // 15 seconds
+                2,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+
+        requestQueue.add(request);
     }
 }
