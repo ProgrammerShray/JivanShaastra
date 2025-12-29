@@ -3,17 +3,16 @@ package com.jps.apps.jiva_nshaastra;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.android.volley.DefaultRetryPolicy;
-
 import com.jps.apps.jiva_nshaastra.philosphies.*;
 
 import org.json.JSONException;
@@ -30,7 +29,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        // Initialize RequestQueue once
         requestQueue = Volley.newRequestQueue(this);
 
         name = findViewById(R.id.user);
@@ -39,17 +37,6 @@ public class HomeActivity extends AppCompatActivity {
             return;
         }
 
-        // Fetch email from SharedPreferences
-        String email = getSharedPreferences("UserPrefs", MODE_PRIVATE)
-                .getString("email", null);
-
-        if (email != null && !email.isEmpty()) {
-            fetchUserName(email);
-        } else {
-            name.setText("Welcome");
-        }
-
-        // Philosophy labels
         sph = findViewById(R.id.sphtext);
         sav = findViewById(R.id.savtext);
         sam = findViewById(R.id.samtext);
@@ -57,6 +44,16 @@ public class HomeActivity extends AppCompatActivity {
         pbk = findViewById(R.id.pbktext);
 
         setClickListeners();
+
+        // Fetch JWT token
+        SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        String token = prefs.getString("token", null);
+
+        if (token != null && !token.isEmpty()) {
+            fetchUserName(token);
+        } else {
+            name.setText("Welcome");
+        }
     }
 
     private void setClickListeners() {
@@ -67,21 +64,13 @@ public class HomeActivity extends AppCompatActivity {
         pbk.setOnClickListener(v -> startActivity(new Intent(this, Pbk.class)));
     }
 
-    private void fetchUserName(String email) {
-        String url = "https://flaskbackendserverdb.onrender.com/auth/user-name";
-
-        JSONObject json = new JSONObject();
-        try {
-            json.put("email", email);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return;
-        }
+    private void fetchUserName(String token) {
+        String url = "https://flaskbackendserverdb.onrender.com/auth/me"; // JWT protected route
 
         JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.POST,
+                Request.Method.GET,
                 url,
-                json,
+                null,
                 response -> {
                     try {
                         String nameFromDb = response.getString("name");
@@ -97,11 +86,17 @@ public class HomeActivity extends AppCompatActivity {
                             "Unable to fetch name",
                             Toast.LENGTH_SHORT).show();
                 }
-        );
+        ) {
+            @Override
+            public java.util.Map<String, String> getHeaders() {
+                java.util.Map<String, String> headers = new java.util.HashMap<>();
+                headers.put("Authorization", "Bearer " + token);
+                return headers;
+            }
+        };
 
-        // IMPORTANT for Render (cold starts)
         request.setRetryPolicy(new DefaultRetryPolicy(
-                15000, // 15 seconds
+                15000,
                 2,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         ));
