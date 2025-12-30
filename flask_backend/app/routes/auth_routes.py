@@ -37,11 +37,14 @@ def login():
 
 @auth_bp.route("/me", methods=["GET"])
 @jwt_required()
-def get_me():
+def me():
     user_id = get_jwt_identity()
     user = UserModel().get_user_by_id(user_id)
 
+    if not user:
+        return jsonify({"success": False}), 404
+
     return jsonify({
         "success": True,
-        "name": user["name"]
-    })
+        "user": user
+    }), 200

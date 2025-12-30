@@ -1,6 +1,7 @@
 from app.utils.db import get_db
 
 class UserModel:
+
     def create_user(self, name, email, password, dob):
         db = get_db()
         cursor = db.cursor()
@@ -12,21 +13,25 @@ class UserModel:
         """
 
         try:
-            cursor.execute(query, (name, email, password.decode(), dob))
-            db.commit()
+            cursor.execute(query, (name, email, password, dob))
             user_id = cursor.fetchone()[0]
-            cursor.close()
+            db.commit()
 
             return {
                 "success": True,
-                "message": "User created",
+                "message": "User created successfully",
                 "user_id": user_id
             }
 
         except Exception as e:
             db.rollback()
+            return {
+                "success": False,
+                "message": str(e)
+            }
+
+        finally:
             cursor.close()
-            return {"success": False, "message": str(e)}
 
     def get_user_by_email(self, email):
         db = get_db()
@@ -52,22 +57,22 @@ class UserModel:
         return None
 
     def get_user_by_id(self, user_id):
-     db = get_db()
-     cursor = db.cursor()
+        db = get_db()
+        cursor = db.cursor()
 
-     cursor.execute(
+        cursor.execute(
             "SELECT id, name, email FROM users WHERE id = %s",
             (user_id,)
         )
 
-     row = cursor.fetchone()
-     cursor.close()
+        row = cursor.fetchone()
+        cursor.close()
 
-     if row:
-        return {
-            "id": row[0],
-            "name": row[1],
-            "email": row[2]
-        }
+        if row:
+            return {
+                "id": row[0],
+                "name": row[1],
+                "email": row[2]
+            }
 
-     return None
+        return None
