@@ -47,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         signupmotivator.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
+            finish();
         });
     }
 
