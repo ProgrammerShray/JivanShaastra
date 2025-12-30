@@ -15,14 +15,17 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.jps.apps.jiva_nshaastra.philosphies.*;
 
-import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class HomeActivity extends AppCompatActivity {
 
     private TextView name;
     private TextView sph, sav, sam, sat, pbk;
     private RequestQueue requestQueue;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +35,6 @@ public class HomeActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
 
         name = findViewById(R.id.user);
-        if (name == null) {
-            Toast.makeText(this, "User TextView not found!", Toast.LENGTH_LONG).show();
-            return;
-        }
-
         sph = findViewById(R.id.sphtext);
         sav = findViewById(R.id.savtext);
         sam = findViewById(R.id.samtext);
@@ -45,14 +43,14 @@ public class HomeActivity extends AppCompatActivity {
 
         setClickListeners();
 
-        // Fetch JWT token
+        // Get JWT token
         SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        String token = prefs.getString("token", null);
+        token = prefs.getString("token", null);
 
         if (token != null && !token.isEmpty()) {
-            fetchUserName(token);
+            fetchUserProfile();
         } else {
-            name.setText("Welcome");
+            redirectToLogin();
         }
     }
 
@@ -64,8 +62,8 @@ public class HomeActivity extends AppCompatActivity {
         pbk.setOnClickListener(v -> startActivity(new Intent(this, Pbk.class)));
     }
 
-    private void fetchUserName(String token) {
-        String url = "https://flaskbackendserverdb.onrender.com/auth/me"; // JWT protected route
+    private void fetchUserProfile() {
+        String url = "https://flaskbackendserverdb.onrender.com/auth/me";
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
@@ -73,28 +71,28 @@ public class HomeActivity extends AppCompatActivity {
                 null,
                 response -> {
                     try {
-                        String nameFromDb = response.getString("name");
+                        JSONObject user = response.getJSONObject("user");
+                        String nameFromDb = user.getString("name");
                         name.setText("Welcome, " + nameFromDb);
-                    } catch (JSONException e) {
+                    } catch (Exception e) {
                         name.setText("Welcome");
                         e.printStackTrace();
                     }
                 },
                 error -> {
-                    name.setText("Welcome");
-                    Toast.makeText(this,
-                            "Unable to fetch name",
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Session expired. Please login again.", Toast.LENGTH_SHORT).show();
+                    redirectToLogin();
                 }
         ) {
             @Override
-            public java.util.Map<String, String> getHeaders() {
-                java.util.Map<String, String> headers = new java.util.HashMap<>();
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
                 headers.put("Authorization", "Bearer " + token);
                 return headers;
             }
         };
 
+        // Important for Render cold start
         request.setRetryPolicy(new DefaultRetryPolicy(
                 15000,
                 2,
@@ -102,5 +100,15 @@ public class HomeActivity extends AppCompatActivity {
         ));
 
         requestQueue.add(request);
+    }
+
+    private void redirectToLogin() {
+        SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        prefs.edit().clear().apply();
+
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 }
