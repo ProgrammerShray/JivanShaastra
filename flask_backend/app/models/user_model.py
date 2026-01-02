@@ -70,9 +70,9 @@ class UserModel:
 
         if row:
             return {
-                "id": row[0],
+                # "id": row[0],
                 "name": row[1],
-                "email": row[2]
+                # "email": row[2]
             }
 
         return None

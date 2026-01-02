@@ -1,34 +1,37 @@
 from app.models.user_model import UserModel
 import bcrypt
+from app.utils.db import get_db
 
 class UserService:
 
+    # register_user service
     def create_user(self, data):
-        name = data.get("name")
-        email = data.get("email")
-        password = data.get("password")
-        dob = data.get("dob")
+        try:
+            query = """
+                INSERT INTO users (id, name, email, password, dob)
+                VALUES (%s, %s, %s, %s, %s)
+            """
 
-        if not all([name, email, password, dob]):
+            values = (
+                data["id"],
+                data["name"],
+                data["email"],
+                data["password"],
+                data.get("dob")
+            )
+
+            UserModel().create_user(query, values)
+
+            return {"success": True}
+
+        except Exception as e:
+            print("Signup error:", e)
             return {
                 "success": False,
-                "message": "Missing fields"
+                "message": "User creation failed"
             }
 
-        # Hash password (bytes → string)
-        hashed_pw = bcrypt.hashpw(
-            password.encode("utf-8"),
-            bcrypt.gensalt()
-        ).decode("utf-8")
-
-        user_model = UserModel()
-        return user_model.create_user(
-            name=name,
-            email=email,
-            password=hashed_pw,
-            dob=dob
-        )
-
+    # login_user service
     def login_user(self, data):
         email = data.get("email")
         password = data.get("password")

@@ -3,5 +3,6 @@ psycopg2-binary
 gunicorn
 python-dotenv
 flask-cors
+uuid
 bcrypt
 Flask-JWT-Extended
