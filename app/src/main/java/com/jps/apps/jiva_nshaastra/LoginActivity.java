@@ -75,22 +75,29 @@ public class LoginActivity extends AppCompatActivity {
 
                         if (success) {
                             String token = response.getString("token");
-                            String name = response.getString("name");
 
-                            // 🔐 Save JWT token securely
+                            JSONObject user = response.getJSONObject("user");
+                            String name = user.getString("name");
+                            String userId = user.getString("id");
+
+                            // 🔐 Save JWT + user info
                             SharedPreferences prefs =
                                     getSharedPreferences("UserPrefs", MODE_PRIVATE);
 
                             prefs.edit()
                                     .putString("token", token)
+                                    .putString("user_id", userId)
                                     .putString("name", name)
                                     .apply();
 
-                            Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this,
+                                    "Welcome " + name,
+                                    Toast.LENGTH_SHORT).show();
 
                             Intent intent = new Intent(this, HomeActivity.class);
                             startActivity(intent);
                             finish();
+
                         } else {
                             Toast.makeText(this,
                                     response.getString("message"),
@@ -99,14 +106,19 @@ public class LoginActivity extends AppCompatActivity {
 
                     } catch (Exception e) {
                         e.printStackTrace();
-                        Toast.makeText(this, "Invalid server response", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this,
+                                "Invalid server response",
+                                Toast.LENGTH_SHORT).show();
                     }
                 },
                 error -> {
-                    Toast.makeText(this, "Login failed!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this,
+                            "Login failed!",
+                            Toast.LENGTH_SHORT).show();
                 }
         );
 
         queue.add(request);
     }
+
 }
