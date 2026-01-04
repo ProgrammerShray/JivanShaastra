@@ -2,59 +2,58 @@ from app.utils.db import get_db
 
 class UserModel:
 
-    def create_user(self, name, email, password, dob):
+    def create_user(self, data):
         db = get_db()
         cursor = db.cursor()
 
         query = """
-            INSERT INTO users (name, email, password, dob)
-            VALUES (%s, %s, %s, %s)
-            RETURNING id;
+            INSERT INTO users (id, name, email, password, dob)
+            VALUES (%s, %s, %s, %s, %s)
         """
 
         try:
-            cursor.execute(query, (name, email, password, dob))
-            user_id = cursor.fetchone()[0]
-            db.commit()
+            cursor.execute(
+                query,
+                (
+                    data["id"],
+                    data["name"],
+                    data["email"],
+                    data["password"],
+                    data.get("dob")
+                )
+            )
 
-            return {
-                "success": True,
-                "message": "User created successfully",
-                "user_id": user_id
-            }
+            db.commit()
+            cursor.close()
+            return True
 
         except Exception as e:
             db.rollback()
-            return {
-                "success": False,
-                "message": str(e)
-            }
-
-        finally:
             cursor.close()
+            print("DB create_user error:", e)
+            return False
 
     def get_user_by_email(self, email):
         db = get_db()
         cursor = db.cursor()
 
         cursor.execute(
-            "SELECT id, name, email, password, dob FROM users WHERE email = %s",
+            "SELECT id, name, email, password FROM users WHERE email = %s",
             (email,)
         )
 
         row = cursor.fetchone()
         cursor.close()
 
-        if row:
-            return {
-                "id": row[0],
-                "name": row[1],
-                "email": row[2],
-                "password": row[3],
-                "dob": row[4]
-            }
+        if not row:
+            return None
 
-        return None
+        return {
+            "id": row[0],
+            "name": row[1],
+            "email": row[2],
+            "password": row[3]
+        }
 
     def get_user_by_id(self, user_id):
         db = get_db()
@@ -68,11 +67,11 @@ class UserModel:
         row = cursor.fetchone()
         cursor.close()
 
-        if row:
-            return {
-                # "id": row[0],
-                "name": row[1],
-                # "email": row[2]
-            }
+        if not row:
+            return None
 
-        return None
+        return {
+            "id": row[0],
+            "name": row[1],
+            "email": row[2]
+        }
