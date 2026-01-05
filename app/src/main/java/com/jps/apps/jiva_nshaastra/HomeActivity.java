@@ -35,6 +35,19 @@ public class HomeActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
 
         name = findViewById(R.id.user);
+        SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+
+// 1️⃣ Show cached name immediately
+        String cachedName = prefs.getString("name", null);
+        if (cachedName != null && !cachedName.isEmpty()) {
+            name.setText("Welcome, " + cachedName);
+        } else {
+            name.setText("Welcome");
+        }
+
+// 2️⃣ Fetch token
+        token = prefs.getString("token", null);
+
         sph = findViewById(R.id.sphtext);
         sav = findViewById(R.id.savtext);
         sam = findViewById(R.id.samtext);
@@ -42,10 +55,6 @@ public class HomeActivity extends AppCompatActivity {
         pbk = findViewById(R.id.pbktext);
 
         setClickListeners();
-
-        // Get JWT token
-        SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        token = prefs.getString("token", null);
 
         if (token != null && !token.isEmpty()) {
             fetchUserProfile();
