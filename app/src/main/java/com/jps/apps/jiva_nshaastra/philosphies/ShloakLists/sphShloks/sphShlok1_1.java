@@ -1,5 +1,6 @@
 package com.jps.apps.jiva_nshaastra.philosphies.ShloakLists.sphShloks;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import com.jps.apps.jiva_nshaastra.R;
 
 public class sphShlok1_1 extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,11 +1,15 @@
 package com.jps.apps.jiva_nshaastra.philosphies.ShloakLists;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.jps.apps.jiva_nshaastra.R;
+import com.jps.apps.jiva_nshaastra.philosphies.ShloakLists.sphShloks.sphShlok1_1;
 
 public class SphShloakList extends AppCompatActivity {
 
@@ -20,6 +24,12 @@ public class SphShloakList extends AppCompatActivity {
         shlok2 = findViewById(R.id.sph_shlok1_2);
         shlok3 = findViewById(R.id.sph_shlok1_3);
 
+        shlok1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SphShloakList.this, sphShlok1_1.class));
+            }
+        });
 
     }
 }
