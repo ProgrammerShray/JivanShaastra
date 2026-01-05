@@ -8,12 +8,16 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.jps.apps.jiva_nshaastra.HomeActivity;
 import com.jps.apps.jiva_nshaastra.R;
 import com.jps.apps.jiva_nshaastra.philosphies.ShloakLists.sphShloks.sphShlok1_1;
 
 public class SphShloakList extends AppCompatActivity {
 
     private TextView shlok1, shlok2, shlok3;
+    private FloatingActionButton floatingActionButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +32,14 @@ public class SphShloakList extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(SphShloakList.this, sphShlok1_1.class));
+            }
+        });
+
+        floatingActionButton = findViewById(R.id.fabHomeSPHshlokLIST);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SphShloakList.this, HomeActivity.class));
             }
         });
 
