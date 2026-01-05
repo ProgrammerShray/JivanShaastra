@@ -151,7 +151,7 @@
             android:layout_height="56dp"
             android:layout_marginStart="24dp"
             android:background="@drawable/circle_purple_background"
-            android:src="@drawable/ic_home"
+            app:srcCompat="@drawable/ic_home"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
