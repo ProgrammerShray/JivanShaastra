@@ -1,70 +1,48 @@
 from app.models.user_model import UserModel
 import bcrypt
-from app.utils.db import get_db
 
 class UserService:
 
-    # register_user service
     def create_user(self, data):
-        try:
-            query = """
-                INSERT INTO users (id, name, email, password, dob)
-                VALUES (%s, %s, %s, %s, %s)
-            """
+        required = ["id", "name", "email", "password"]
+        if not all(data.get(k) for k in required):
+            return {"success": False, "message": "Missing fields"}
 
-            values = (
-                data["id"],
-                data["name"],
-                data["email"],
-                data["password"],
-                data.get("dob")
-            )
+        # 🔐 HASH PASSWORD
+        hashed_pw = bcrypt.hashpw(
+            data["password"].encode("utf-8"),
+            bcrypt.gensalt()
+        ).decode("utf-8")
 
-            UserModel().create_user(query, values)
+        data["password"] = hashed_pw
 
-            return {"success": True}
+        created = UserModel().create_user(data)
 
-        except Exception as e:
-            print("Signup error:", e)
-            return {
-                "success": False,
-                "message": "User creation failed"
-            }
+        if not created:
+            return {"success": False, "message": "User creation failed"}
 
-    # login_user service
+        return {"success": True}
+
     def login_user(self, data):
         email = data.get("email")
         password = data.get("password")
 
         if not email or not password:
-            return {
-                "success": False,
-                "message": "Email and password required"
-            }
+            return {"success": False, "message": "Email and password required"}
 
         user = UserModel().get_user_by_email(email)
 
         if not user:
-            return {
-                "success": False,
-                "message": "Invalid credentials"
-            }
+            return {"success": False, "message": "Invalid credentials"}
 
-        # Compare passwords safely
-        password_matches = bcrypt.checkpw(
+        if not bcrypt.checkpw(
             password.encode("utf-8"),
             user["password"].encode("utf-8")
-        )
-
-        if not password_matches:
-            return {
-                "success": False,
-                "message": "Invalid credentials"
-            }
+        ):
+            return {"success": False, "message": "Invalid credentials"}
 
         return {
             "success": True,
-            "message": "Login successful",
             "user": {
                 "id": user["id"],
                 "name": user["name"],
