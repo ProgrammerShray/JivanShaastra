@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -113,10 +114,16 @@ public class LoginActivity extends AppCompatActivity {
                 },
                 error -> {
                     Toast.makeText(this,
-                            "Login failed!",
+                            "Login failed!"+ error.toString(),
                             Toast.LENGTH_SHORT).show();
                 }
         );
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                20000, // ⏱ 20 seconds (important for Render cold start)
+                1,     // retry once
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+
 
         queue.add(request);
     }
