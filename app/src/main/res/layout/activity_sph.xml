@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="serif"
             android:text="SPH = Sva-Prerna Harmony\n(Self-Inspired Harmony)"
-            android:textColor="#D4A017"
+            android:textColor="#d89843"
             android:textSize="28sp"
             android:textStyle="bold" />
 
