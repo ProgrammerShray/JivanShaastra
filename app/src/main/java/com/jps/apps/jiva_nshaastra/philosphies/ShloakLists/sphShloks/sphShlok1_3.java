@@ -29,6 +29,7 @@ public class sphShlok1_3 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(sphShlok1_3.this, HomeActivity.class));
+                finish();
             }
         });
 
@@ -37,6 +38,7 @@ public class sphShlok1_3 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(sphShlok1_3.this, Sph.class));
+                finish();
             }
         });
     }
