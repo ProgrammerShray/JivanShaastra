@@ -17,6 +17,11 @@ import com.android.volley.toolbox.Volley;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
+import android.app.DatePickerDialog;
+import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 
 public class MainActivity extends AppCompatActivity {
     private EditText username, email, password, dob;
@@ -33,6 +38,35 @@ public class MainActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         dob = findViewById(R.id.dob);
+        Calendar calendar = Calendar.getInstance();
+
+        dob.setOnClickListener(v -> {
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(
+                    this,
+                    (view, selectedYear, selectedMonth, selectedDay) -> {
+
+                        Calendar selectedDate = Calendar.getInstance();
+                        selectedDate.set(selectedYear, selectedMonth, selectedDay);
+
+                        SimpleDateFormat sdf =
+                                new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+
+                        dob.setText(sdf.format(selectedDate.getTime()));
+                    },
+                    year, month, day
+            );
+
+            // OPTIONAL: prevent future dates
+            datePickerDialog.getDatePicker()
+                    .setMaxDate(System.currentTimeMillis());
+
+            datePickerDialog.show();
+        });
+
         loginmotivator= findViewById(R.id.Loginmotivator);
         signup = findViewById(R.id.submit);
 
