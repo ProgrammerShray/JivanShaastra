@@ -125,7 +125,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center"
-            android:italic="true"
+            android:textStyle="italic"
             android:text="> “Discipline is not restriction; it is the freedom to grow.”"
             android:textColor="#333333"
             android:textSize="18sp" />
