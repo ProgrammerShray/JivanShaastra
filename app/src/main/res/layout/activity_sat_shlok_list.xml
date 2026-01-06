@@ -6,13 +6,13 @@
     android:background="#FFFFFF">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardHeaderImage"
+        android:id="@+id/cardHeader"
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="220dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="40dp"
-        app:cardCornerRadius="16dp"
+        app:cardCornerRadius="20dp"
         app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,118 +22,108 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/sph_home2" />
+            android:src="@drawable/sph_home1" />
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/tvSavTitle"
+        android:id="@+id/tvSatTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:fontFamily="sans-serif-black"
-        android:text="SAV"
+        android:fontFamily="serif"
+        android:text="SAT"
         android:textColor="#D4A017"
-        android:textSize="36sp"
+        android:textSize="42sp"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardHeaderImage" />
+        app:layout_constraintTop_toBottomOf="@id/cardHeader" />
 
     <View
-        android:id="@+id/underline"
+        android:id="@+id/titleUnderline"
         android:layout_width="80dp"
         android:layout_height="3dp"
         android:background="#D4A017"
-        app:layout_constraintEnd_toEndOf="@+id/tvSavTitle"
-        app:layout_constraintStart_toStartOf="@+id/tvSavTitle"
-        app:layout_constraintTop_toBottomOf="@+id/tvSavTitle" />
+        app:layout_constraintEnd_toEndOf="@id/tvSatTitle"
+        app:layout_constraintStart_toStartOf="@id/tvSatTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvSatTitle" />
 
     <LinearLayout
-        android:id="@+id/llShlokList"
+        android:id="@+id/llShlokContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/underline">
+        app:layout_constraintTop_toBottomOf="@id/titleUnderline">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:padding="12dp">
-
-            <View
-                android:layout_width="12dp"
-                android:layout_height="12dp"/>
-
-            <TextView
-                android:id="@+id/sav_shlok1.1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:text="SHLOK 2.1"
-                android:textColor="#1A237E"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:padding="12dp">
-
-            <View
-                android:layout_width="12dp"
-                android:layout_height="12dp"/>
-
-            <TextView
-                android:id="@+id/sav_shlok1.2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:text="SHLOK 2.2"
-                android:textColor="#1A237E"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:padding="12dp">
-
             <View
                 android:layout_width="12dp"
                 android:layout_height="12dp" />
-
             <TextView
-                android:id="@+id/sav_shlok1.3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:text="SHLOK 2.3"
+                android:text="SHLOK 3.1"
                 android:textColor="#1A237E"
-                android:textSize="24sp"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="12dp">
+            <View
+                android:layout_width="12dp"
+                android:layout_height="12dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="SHLOK 3.2"
+                android:textColor="#1A237E"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="12dp">
+            <View
+                android:layout_width="12dp"
+                android:layout_height="12dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="SHLOK 3.3"
+                android:textColor="#1A237E"
+                android:textSize="26sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabHomeSAVshlokLIST"
+        android:id="@+id/fabHomeSATshlokLIST"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginBottom="24dp"
-        android:contentDescription="Home Button"
+        android:contentDescription="Home"
         app:srcCompat="@drawable/ic_home"
         app:backgroundTint="#6C63FF"
         app:elevation="6dp"
-        app:fabCustomSize="64dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:tint="#FFFFFF" />

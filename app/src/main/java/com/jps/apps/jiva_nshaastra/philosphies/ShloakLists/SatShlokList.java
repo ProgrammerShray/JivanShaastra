@@ -10,19 +10,22 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.jps.apps.jiva_nshaastra.HomeActivity;
 import com.jps.apps.jiva_nshaastra.R;
+import com.jps.apps.jiva_nshaastra.philosphies.ShloakLists.satShloks.satShlok1_1;
+import com.jps.apps.jiva_nshaastra.philosphies.ShloakLists.satShloks.satShlok1_2;
+import com.jps.apps.jiva_nshaastra.philosphies.ShloakLists.satShloks.satShlok1_3;
 import com.jps.apps.jiva_nshaastra.philosphies.ShloakLists.savShloks.savShlok1_1;
 import com.jps.apps.jiva_nshaastra.philosphies.ShloakLists.savShloks.savShlok1_2;
 import com.jps.apps.jiva_nshaastra.philosphies.ShloakLists.savShloks.savShlok1_3;
 
-public class SavShlokList extends AppCompatActivity {
+public class SatShlokList extends AppCompatActivity {
 
     private FloatingActionButton floatingActionButton;
-    private TextView shlok1_1,shlok1_2,shlok1_3;
+    private TextView shlok1_1, shlok1_2, shlok1_3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sav_shlok_list);
+        setContentView(R.layout.activity_sat_shlok_list);
 
         shlok1_1 = findViewById(R.id.sav_shlok1_1);
         shlok1_2 = findViewById(R.id.sav_shlok1_2);
@@ -31,7 +34,7 @@ public class SavShlokList extends AppCompatActivity {
         shlok1_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SavShlokList.this, savShlok1_1.class));
+                startActivity(new Intent(SatShlokList.this, satShlok1_1.class));
                 finish();
             }
         });
@@ -39,7 +42,7 @@ public class SavShlokList extends AppCompatActivity {
         shlok1_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SavShlokList.this, savShlok1_2.class));
+                startActivity(new Intent(SatShlokList.this, satShlok1_2.class));
                 finish();
             }
         });
@@ -47,7 +50,7 @@ public class SavShlokList extends AppCompatActivity {
         shlok1_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SavShlokList.this, savShlok1_3.class));
+                startActivity(new Intent(SatShlokList.this, satShlok1_3.class));
                 finish();
             }
         });
@@ -56,10 +59,9 @@ public class SavShlokList extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SavShlokList.this, HomeActivity.class));
+                startActivity(new Intent(SatShlokList.this, HomeActivity.class));
                 finish();
             }
         });
-
     }
 }
