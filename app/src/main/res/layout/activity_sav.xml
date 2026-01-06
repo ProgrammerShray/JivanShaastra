@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="serif"
-            android:text=". SAV = Sva-\nAnushasan Vikas\n(Self-Discipline\nand Growth)"
+            android:text="SAV = Sva-\nAnushasan Vikas\n(Self-Discipline\nand Growth)"
             android:textColor="#D4A017"
             android:textSize="28sp"
             android:textStyle="bold" />
