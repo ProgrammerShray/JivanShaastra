@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/Theme.JivanSaarthi"
         android:usesCleartextTraffic="true">
-        <activity android:name=".philosphies.ShloakLists.satShloks.satShlok1_3"></activity>
+        <activity android:name=".philosphies.ShloakLists.samShloks.samShlok1_1"></activity>
+        <activity android:name=".philosphies.ShloakLists.SamShlokList" />
+        <activity android:name=".philosphies.ShloakLists.satShloks.satShlok1_3" />
         <activity android:name=".philosphies.ShloakLists.satShloks.satShlok1_2" />
         <activity android:name=".philosphies.ShloakLists.satShloks.satShlok1_1" />
         <activity android:name=".philosphies.ShloakLists.SatShlokList" />
