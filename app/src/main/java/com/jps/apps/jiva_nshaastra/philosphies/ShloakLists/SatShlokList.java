@@ -27,9 +27,9 @@ public class SatShlokList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sat_shlok_list);
 
-        shlok1_1 = findViewById(R.id.sav_shlok1_1);
-        shlok1_2 = findViewById(R.id.sav_shlok1_2);
-        shlok1_3 = findViewById(R.id.sav_shlok1_3);
+        shlok1_1 = findViewById(R.id.sat_shlok1_1);
+        shlok1_2 = findViewById(R.id.sat_shlok1_2);
+        shlok1_3 = findViewById(R.id.sat_shlok1_3);
 
         shlok1_1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +55,7 @@ public class SatShlokList extends AppCompatActivity {
             }
         });
 
-        floatingActionButton = findViewById(R.id.fabHomeSAVshlokLIST);
+        floatingActionButton = findViewById(R.id.fabHomeSATshlokLIST);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
