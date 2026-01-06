@@ -116,7 +116,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/btnDeepDive"
+            android:id="@+id/btnDeepDiveSPH"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

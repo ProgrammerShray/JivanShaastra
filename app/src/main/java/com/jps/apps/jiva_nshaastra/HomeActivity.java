@@ -64,11 +64,11 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void setClickListeners() {
-        sph.setOnClickListener(v -> startActivity(new Intent(this, Sph.class)));
-        sav.setOnClickListener(v -> startActivity(new Intent(this, Sav.class)));
-        sam.setOnClickListener(v -> startActivity(new Intent(this, Sam.class)));
-        sat.setOnClickListener(v -> startActivity(new Intent(this, Sat.class)));
-        pbk.setOnClickListener(v -> startActivity(new Intent(this, Pbk.class)));
+        sph.setOnClickListener(v -> {startActivity(new Intent(this, Sph.class)); finish();});
+        sav.setOnClickListener(v -> {startActivity(new Intent(this, Sav.class)); finish();});
+        sam.setOnClickListener(v -> {startActivity(new Intent(this, Sam.class)); finish();});
+        sat.setOnClickListener(v -> {startActivity(new Intent(this, Sat.class)); finish();});
+        pbk.setOnClickListener(v -> {startActivity(new Intent(this, Pbk.class)); finish();});
     }
 
     private void fetchUserProfile() {
