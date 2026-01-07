@@ -31,7 +31,7 @@ public class Sav extends AppCompatActivity {
             }
         });
 
-        floatingActionButton = findViewById(R.id.fabHomeSAT);
+        floatingActionButton = findViewById(R.id.fabHomeSAV);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
