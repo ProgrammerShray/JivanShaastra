@@ -53,7 +53,7 @@ public class SamShlokList extends AppCompatActivity {
             }
         });
 
-        floatingActionButton = findViewById(R.id.fabHomeSATshlokLIST);
+        floatingActionButton = findViewById(R.id.fabHomeSAMshlokLIST);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
