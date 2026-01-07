@@ -7,11 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.jps.apps.jiva_nshaastra.HomeActivity;
 import com.jps.apps.jiva_nshaastra.R;
 import com.jps.apps.jiva_nshaastra.philosphies.ShloakLists.SamShlokList;
 
 public class Sam extends AppCompatActivity {
     private TextView textView;
+    private FloatingActionButton floatingActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,14 @@ public class Sam extends AppCompatActivity {
             public void onClick(View view) {
                 startActivity(new Intent(Sam.this, SamShlokList.class));
                 finish();
+            }
+        });
+
+        floatingActionButton = findViewById(R.id.fabHomeSAM);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Sam.this, HomeActivity.class));
             }
         });
     }

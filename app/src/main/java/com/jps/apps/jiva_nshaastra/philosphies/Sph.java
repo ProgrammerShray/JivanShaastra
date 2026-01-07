@@ -7,12 +7,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.jps.apps.jiva_nshaastra.HomeActivity;
 import com.jps.apps.jiva_nshaastra.R;
 import com.jps.apps.jiva_nshaastra.philosphies.ShloakLists.SphShloakList;
 
 public class Sph extends AppCompatActivity {
 
     private TextView deepDive;
+    private FloatingActionButton floatingActionButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +27,15 @@ public class Sph extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Sph.this, SphShloakList.class));
+                finish();
+            }
+        });
+
+        floatingActionButton= findViewById(R.id.fabHomeSPH);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Sph.this, HomeActivity.class));
                 finish();
             }
         });
