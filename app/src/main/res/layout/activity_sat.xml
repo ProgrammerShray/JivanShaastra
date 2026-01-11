@@ -43,7 +43,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/sph_home1" />
+                        android:src="@drawable/sat_home1" />
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -57,7 +57,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/sph_home2" />
+                        android:src="@drawable/sat_home2" />
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
 
@@ -95,7 +95,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="80dp" />
+                android:layout_height="40dp" />
 
             <TextView
                 android:layout_width="match_parent"

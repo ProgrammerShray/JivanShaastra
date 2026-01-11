@@ -23,11 +23,12 @@
                 android:layout_height="180dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="0dp">
+
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="204dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/sph_home1" />
+                    android:src="@drawable/sav_home1" />
             </androidx.cardview.widget.CardView>
 
             <TextView
@@ -89,7 +90,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/sph_home2" />
+                    android:src="@drawable/sav_home2" />
             </androidx.cardview.widget.CardView>
 
             <TextView

@@ -20,9 +20,9 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="246dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/sph_home1" />
+            android:src="@drawable/sam_home2" />
     </androidx.cardview.widget.CardView>
 
     <TextView
