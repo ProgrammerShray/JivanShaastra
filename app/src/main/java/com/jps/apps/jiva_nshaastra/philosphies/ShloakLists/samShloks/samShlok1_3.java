@@ -11,10 +11,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.jps.apps.jiva_nshaastra.HomeActivity;
 import com.jps.apps.jiva_nshaastra.R;
 import com.jps.apps.jiva_nshaastra.philosphies.Sam;
-import com.jps.apps.jiva_nshaastra.philosphies.Sat;
-import com.jps.apps.jiva_nshaastra.philosphies.ShloakLists.satShloks.satShlok1_1;
 
-public class samShlok1_1 extends AppCompatActivity {
+public class samShlok1_3 extends AppCompatActivity {
 
     private FloatingActionButton floatingActionButton;
     private TextView textView;
@@ -22,23 +20,23 @@ public class samShlok1_1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sam_shlok1_1);
+        setContentView(R.layout.activity_sam_shlok1_3);
 
 
-        floatingActionButton = findViewById(R.id.fabHomeSAM1_2);
+        floatingActionButton = findViewById(R.id.fabHomeSAM1_3);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(samShlok1_1.this, HomeActivity.class));
+                startActivity(new Intent(samShlok1_3.this, HomeActivity.class));
                 finish();
             }
         });
 
-        textView= findViewById(R.id.sam_shlok1_2LABEL);
+        textView = findViewById(R.id.sam_shlok1_3LABEL);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(samShlok1_1.this, Sam.class));
+                startActivity(new Intent(samShlok1_3.this, Sam.class));
                 finish();
             }
         });
