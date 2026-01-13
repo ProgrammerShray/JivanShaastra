@@ -24,7 +24,7 @@ public class samShlok1_2 extends AppCompatActivity {
         setContentView(R.layout.activity_sam_shlok1_2);
 
 
-        floatingActionButton = findViewById(R.id.fabHomeSAM1_1);
+        floatingActionButton = findViewById(R.id.fabHomeSAM1_2);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -33,7 +33,7 @@ public class samShlok1_2 extends AppCompatActivity {
             }
         });
 
-        textView = findViewById(R.id.sam_shlok1_1LABEL);
+        textView = findViewById(R.id.sam_shlok1_2LABEL);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
