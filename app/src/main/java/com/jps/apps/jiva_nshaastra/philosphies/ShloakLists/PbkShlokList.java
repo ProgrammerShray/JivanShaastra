@@ -1,4 +1,4 @@
-package com.jps.apps.jiva_nshaastra.philosphies;
+package com.jps.apps.jiva_nshaastra.philosphies.ShloakLists;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,13 +10,9 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.jps.apps.jiva_nshaastra.HomeActivity;
 import com.jps.apps.jiva_nshaastra.R;
-import com.jps.apps.jiva_nshaastra.philosphies.ShloakLists.SamShlokList;
 import com.jps.apps.jiva_nshaastra.philosphies.ShloakLists.pbkShloks.pbkShlok1_1;
 import com.jps.apps.jiva_nshaastra.philosphies.ShloakLists.pbkShloks.pbkShlok1_2;
 import com.jps.apps.jiva_nshaastra.philosphies.ShloakLists.pbkShloks.pbkShlok1_3;
-import com.jps.apps.jiva_nshaastra.philosphies.ShloakLists.samShloks.samShlok1_1;
-import com.jps.apps.jiva_nshaastra.philosphies.ShloakLists.samShloks.samShlok1_2;
-import com.jps.apps.jiva_nshaastra.philosphies.ShloakLists.samShloks.samShlok1_3;
 
 public class PbkShlokList extends AppCompatActivity {
 
@@ -56,7 +52,7 @@ public class PbkShlokList extends AppCompatActivity {
             }
         });
 
-        floatingActionButton = findViewById(R.id.fabHomeSAMshlokLIST);
+        floatingActionButton = findViewById(R.id.fabHomePbkshlokLIST);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -14,7 +14,7 @@
         <activity android:name=".philosphies.ShloakLists.pbkShloks.pbkShlok1_3"></activity>
         <activity android:name=".philosphies.ShloakLists.pbkShloks.pbkShlok1_2" />
         <activity android:name=".philosphies.ShloakLists.pbkShloks.pbkShlok1_1" />
-        <activity android:name=".philosphies.PbkShlokList" />
+        <activity android:name=".philosphies.ShloakLists.PbkShlokList" />
         <activity android:name=".philosphies.ShloakLists.samShloks.samShlok1_3" />
         <activity android:name=".philosphies.ShloakLists.samShloks.samShlok1_2" />
         <activity android:name=".philosphies.ShloakLists.samShloks.samShlok1_1" />

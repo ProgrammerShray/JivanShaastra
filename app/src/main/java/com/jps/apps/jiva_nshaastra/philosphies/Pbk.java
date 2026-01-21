@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.jps.apps.jiva_nshaastra.HomeActivity;
 import com.jps.apps.jiva_nshaastra.R;
-import com.jps.apps.jiva_nshaastra.philosphies.ShloakLists.SamShlokList;
+import com.jps.apps.jiva_nshaastra.philosphies.ShloakLists.PbkShlokList;
 
 public class Pbk extends AppCompatActivity {
     private TextView textView;
