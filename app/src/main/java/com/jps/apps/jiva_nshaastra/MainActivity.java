@@ -1,43 +1,46 @@
 package com.jps.apps.jiva_nshaastra;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
-import android.app.DatePickerDialog;
-import java.util.Calendar;
+
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Locale;
 
-
 public class MainActivity extends AppCompatActivity {
+
     private EditText username, email, password, dob;
-    private Button loginmotivator;
-    private Button signup;
+    private Button loginmotivator, signup;
+
+    private FirebaseAuth mAuth; // 🔥 Firebase Auth
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //initializing the id(s)
+        mAuth = FirebaseAuth.getInstance(); // 🔥 Initialize Firebase
+
         username = findViewById(R.id.username);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         dob = findViewById(R.id.dob);
+
         Calendar calendar = Calendar.getInstance();
 
         dob.setOnClickListener(v -> {
@@ -60,55 +63,80 @@ public class MainActivity extends AppCompatActivity {
                     year, month, day
             );
 
-            // OPTIONAL: prevent future dates
             datePickerDialog.getDatePicker()
                     .setMaxDate(System.currentTimeMillis());
 
             datePickerDialog.show();
         });
 
-        loginmotivator= findViewById(R.id.Loginmotivator);
+        loginmotivator = findViewById(R.id.Loginmotivator);
         signup = findViewById(R.id.submit);
 
-        if (signup == null) {
-            Toast.makeText(this, "Submit button not found!", Toast.LENGTH_LONG).show();
-            return;
-        }
+        signup.setOnClickListener(view -> {
+            String name = username.getText().toString().trim();
+            String mail = email.getText().toString().trim();
+            String pass = password.getText().toString().trim();
+            String dobi = dob.getText().toString().trim();
 
-
-        signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String name = username.getText().toString().trim();
-                String mail = email.getText().toString().trim();
-                String pass = password.getText().toString().trim();
-                String dobi = dob.getText().toString().trim();
-
-                if (name.isEmpty() || mail.isEmpty() || pass.isEmpty() || dobi.isEmpty()) {
-                    Toast.makeText(MainActivity.this, "Please fill all fields!", Toast.LENGTH_SHORT).show();
-                } else {
-                    signUp(name, mail, pass, dobi);
-                }
+            if (name.isEmpty() || mail.isEmpty() || pass.isEmpty() || dobi.isEmpty()) {
+                Toast.makeText(MainActivity.this, "Please fill all fields!", Toast.LENGTH_SHORT).show();
+            } else if (pass.length() < 6) {
+                Toast.makeText(MainActivity.this, "Password must be at least 6 characters!", Toast.LENGTH_SHORT).show();
+            } else {
+                registerWithFirebase(name, mail, pass, dobi);
             }
         });
-
-        if (loginmotivator == null) {
-            Toast.makeText(this, "Login button not found!", Toast.LENGTH_LONG).show();
-            return;
-        }
 
         loginmotivator.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
         });
-
     }
-    private void signUp(String name, String email, String password, String dob){
-//        String url = "http://192.168.178.159:5000/auth/signup"; --> Use when your device is using real mobile
-//        String url = "http://10.0.2.2:5000/auth/signup"; //it will work with avd or any virtual device
 
-        String url = "https://flaskbackendserverdb.onrender.com/auth/signup"; //it will work with avd and mobile
+    // 🔥 Step 1: Create Firebase user and send verification
+    private void registerWithFirebase(String name, String email, String password, String dob) {
+
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
+
+                    if (task.isSuccessful()) {
+
+                        FirebaseUser user = mAuth.getCurrentUser();
+
+                        if (user != null) {
+                            user.sendEmailVerification()
+                                    .addOnCompleteListener(verifyTask -> {
+
+                                        if (verifyTask.isSuccessful()) {
+
+                                            Toast.makeText(this,
+                                                    "Verifying your details....",
+                                                    Toast.LENGTH_LONG).show();
+
+                                            // 🔥 Now call backend signup
+                                            signUp(name, email, password, dob);
+
+                                        } else {
+                                            Toast.makeText(this,
+                                                    "Failed to verify the details. Please enter valid credentials!",
+                                                    Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+                        }
+
+                    } else {
+                        Toast.makeText(this,
+                                "Firebase Error: " + task.getException().getMessage(),
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    // 🔥 Step 2: Your original backend signup (UNCHANGED)
+    private void signUp(String name, String email, String password, String dob) {
+
+        String url = "https://flaskbackendserverdb.onrender.com/auth/signup";
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -118,7 +146,9 @@ public class MainActivity extends AppCompatActivity {
             data.put("email", email);
             data.put("password", password);
             data.put("dob", dob);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.POST,
@@ -132,12 +162,10 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 
                         if (success) {
-                            // move to next activity
                             Intent intent = new Intent(this, HomeActivity.class);
                             startActivity(intent);
                             finish();
-                        }
-                        else{
+                        } else {
                             Toast.makeText(this, "Something went wrong!", Toast.LENGTH_SHORT).show();
                         }
 
@@ -147,12 +175,9 @@ public class MainActivity extends AppCompatActivity {
                 },
                 error -> {
                     Toast.makeText(this, "Error: " + error.toString(), Toast.LENGTH_LONG).show();
-                    System.out.println(error.toString());
                 }
         );
 
         queue.add(request);
-
-
     }
 }

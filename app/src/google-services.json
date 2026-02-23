@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "999173899750",
+    "project_id": "jiva-n-shaastra",
+    "storage_bucket": "jiva-n-shaastra.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:999173899750:android:ae2c719bc1a64da4564227",
+        "android_client_info": {
+          "package_name": "com.jps.apps.jiva_nshaastra"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfx9QLyd77CcBa40CgEcmqy8Ag56VIjwA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
